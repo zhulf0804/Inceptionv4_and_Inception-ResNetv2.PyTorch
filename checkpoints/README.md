@@ -1,0 +1,2 @@
++ download Inception-v4 checkpoint from [http://data.lip6.fr/cadene/pretrainedmodels/inceptionv4-8e4777a0.pth](http://data.lip6.fr/cadene/pretrainedmodels/inceptionv4-8e4777a0.pth)
++ download Inception-ResNet-v2 checkpoint from [http://data.lip6.fr/cadene/pretrainedmodels/inceptionresnetv2-520b38e4.pth](http://data.lip6.fr/cadene/pretrainedmodels/inceptionresnetv2-520b38e4.pth)

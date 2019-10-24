@@ -87,7 +87,7 @@ def inceptionv4_eval(model, val_data_path):
 
 
 if __name__ == '__main__':
-    accuracy = inference(model, val_data_path)
+    accuracy = inceptionv4_eval(model, val_data_path)
     print("The accuracy is %f" % accuracy)
 
 

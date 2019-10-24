@@ -7,8 +7,8 @@ class Conv2d(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, padding, stride=1, bias=True):
         super(Conv2d, self).__init__()
         self.conv = nn.Conv2d(in_channels, out_channels, kernel_size, stride=stride, padding=padding, bias=bias)
-        self.bn = nn.BatchNorm2d(out_channels, eps=0.001)
-        self.relu = nn.ReLU()
+        self.bn = nn.BatchNorm2d(out_channels, eps=0.001, momentum=0.1)
+        self.relu = nn.ReLU(inplace=True)
     def forward(self, x):
         x = self.conv(x)
         x = self.bn(x)
