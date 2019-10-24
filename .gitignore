@@ -3,3 +3,7 @@ __pycache__/
 *$py.class
 .idea/
 test*.py
+checkpoints/
+data/ILSVRC2012_img_val
+model/.DS_Store
+.DS_Store

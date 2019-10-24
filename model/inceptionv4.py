@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 from model.units import Conv2d, Stem, Reduction_A, Reduction_B
+from pretrainedmodels.models.inceptionv4 import Inception_A, Inception_B, Inception_C
 
 
 class Inception_A(nn.Module):
@@ -17,7 +18,7 @@ class Inception_A(nn.Module):
             Conv2d(96, 96, 3, stride=1, padding=1, bias=False),
         )
         self.brance_3 = nn.Sequential(
-            nn.AvgPool2d(3, 1, padding=1),
+            nn.AvgPool2d(3, 1, padding=1, count_include_pad=False),
             Conv2d(384, 96, 1, stride=1, padding=0, bias=False)
         )
 
@@ -46,7 +47,7 @@ class Inception_B(nn.Module):
             Conv2d(224, 256, (1, 7), stride=1, padding=(0, 3), bias=False)
         )
         self.branch_3 = nn.Sequential(
-            nn.AvgPool2d(3, stride=1, padding=1),
+            nn.AvgPool2d(3, stride=1, padding=1, count_include_pad=False),
             Conv2d(in_channels, 128, 1, stride=1, padding=0, bias=False)
         )
     def forward(self, x):
@@ -75,7 +76,7 @@ class Inception_C(nn.Module):
         self.branch_2_2 = Conv2d(512, 256, (3, 1), stride=1, padding=(1, 0), bias=False)
 
         self.branch_3 = nn.Sequential(
-            nn.AvgPool2d(3, stride=1, padding=1),
+            nn.AvgPool2d(3, stride=1, padding=1, count_include_pad=False),
             Conv2d(in_channels, 256, 1, stride=1, padding=0, bias=False)
         )
 
@@ -84,23 +85,18 @@ class Inception_C(nn.Module):
         x1 = self.branch_1(x)
         x1_1 = self.branch_1_1(x1)
         x1_2 = self.branch_1_2(x1)
+        x1 = torch.cat((x1_1, x1_2), 1)
         x2 = self.branch_2(x)
         x2_1 = self.branch_2_1(x2)
         x2_2 = self.branch_2_2(x2)
+        x2 = torch.cat((x2_1, x2_2), dim=1)
         x3 = self.branch_3(x)
-        return torch.cat((x0, x1_1, x1_2, x2_1, x2_2, x3), dim=1) # 8 x 8 x 1536
+        return torch.cat((x0, x1, x2, x3), dim=1) # 8 x 8 x 1536
 
 
 class Inceptionv4(nn.Module):
     def __init__(self, in_channels=3, classes=1000, k=192, l=224, m=256, n=384):
         super(Inceptionv4, self).__init__()
-
-        self.input_space = 'RGB'
-        self.input_size = (299, 299, 3)
-        self.mean = [0.5, 0.5, 0.5]
-        self.std = [0.5, 0.5, 0.5]
-        self.input_range = [0, 1]
-
         blocks = []
         blocks.append(Stem(in_channels))
         for i in range(4):
@@ -121,6 +117,7 @@ class Inceptionv4(nn.Module):
         x = x.view(x.size(0), -1)
         x = self.linear(x)
         return x
+
 
 
 
