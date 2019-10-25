@@ -52,8 +52,3 @@ class ImageNet(Dataset):
         tfs.append(transforms.Normalize(self.mean, self.std))
         tf = transforms.Compose(tfs)
         return tf
-
-
-
-
-

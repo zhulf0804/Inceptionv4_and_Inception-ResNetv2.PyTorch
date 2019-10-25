@@ -4,7 +4,7 @@ the Impact of Residual Connections on Learning](https://arxiv.org/abs/1602.07261
 
 ## Models
 + Inception-v4
-+ Inception-ResNet-v2(TBD)
++ Inception-ResNet-v2
 
 ## Analysis
 All the results reported here are based on **this repo**, and 50000 ImageNet **validation** sets。
@@ -19,35 +19,35 @@ All the results reported here are based on **this repo**, and 50000 ImageNet **v
 
 + Top-1 and top-5 accuracy **with** blacklisted entities
 
-|   Model  | top-1([TF](https://github.com/tensorflow/models/tree/master/research/slim)) | top-1(this repo) | top-5([TF](https://github.com/tensorflow/models/tree/master/research/slim)) | top-5(this repo) |
-| :------: | :------: | :------: | :------: | :------: |
-| Inception-v4 | 0.801 | 0.801 | 0.952 | 0.950 |
-| Inception-ResNet-v2 | 0.804 |  | 0.953 |  |
+    |   Model  | top-1([TF](https://github.com/tensorflow/models/tree/master/research/slim)) | top-1(this repo) | top-5([TF](https://github.com/tensorflow/models/tree/master/research/slim)) | top-5(this repo) |
+    | :------: | :------: | :------: | :------: | :------: |
+    | Inception-v4 | 0.801 | 0.801 | 0.952 | 0.950 |
+    | Inception-ResNet-v2 | 0.804 | 0.803  | 0.953 | 0.951 |
 
 
 + Other hyper-parameters in **Inception-v4**
 
     `eps` in **BatchNorm2d** and `count_include_pad` in **AvgPool2d**
 
-|  Config | #top-1 | top-1 | #top-5 | top-5 |
-| :------: | :------: | :------: | :------: | :------: |
-| eps=0.001, count_include_pad=False | 40041 | 0.801 | 47445 | 0.949 |
-| eps=0.001, count_include_pad=True | 39970 | 0.799 | 47395 | 0.948 |
-| eps=1e-5, count_include_pad=False | 40036 | 0.801 | 47438 | 0.949 |
+    |  Config | #top-1 | top-1 | #top-5 | top-5 |
+    | :------: | :------: | :------: | :------: | :------: |
+    | eps=0.001, count_include_pad=False | 40041 | 0.801 | 47445 | 0.949 |
+    | eps=0.001, count_include_pad=True | 39970 | 0.799 | 47395 | 0.948 |
+    | eps=1e-5, count_include_pad=False | 40036 | 0.801 | 47438 | 0.949 |
 
 + Model parameters and FLOPs
 
-|   Model  | Params(M) | FLOPs(G) |
-| :------: | :------: | :------: |
-| Inception-v4 | 42.68 | 6.31 | 
-| Inception-ResNet-v2 |  |  |
+    |   Model  | Params(M) | FLOPs(G) |
+    | :------: | :------: | :------: |
+    | Inception-v4 | 42.68 | 6.31 | 
+    | Inception-ResNet-v2 | 55.84  | 6.65 |
 
 + Average inference time(RTX 2080Ti)
 
-|   Model  | Single inference time(ms) | 
-| :------: | :------: |
-| Inception-v4 | 38.56 | 
-| Inception-ResNet-v2 |  | 
+    |   Model  | Single inference time(ms) | 
+    | :------: | :------: |
+    | Inception-v4 | 38.56 | 
+    | Inception-ResNet-v2 | 72.42 | 
 
 + Top-1 and top-5 accuracy(bottom-10 classes)
 
@@ -70,10 +70,19 @@ All the results reported here are based on **this repo**, and 50000 ImageNet **v
     
         | Top-1 accuracy | Classes | Top-5 accuracy | Classes |
         | :------: | :------: | :------: | :------: |
-        | |  |  |  |
+        | 0.18 | n04152593 : screen, CRT screen | 0.6 | n04286575 : spotlight, spot |
+        | 0.22 | n03710637 : maillot | 0.64 | n04525038 : velvet |
+        | 0.22 | n02123159 : tiger cat | 0.64 | n03692522 : loupe, jeweler's loupe |
+        | 0.28 | n02979186 : cassette player | 0.66 | n03658185 : letter opener, paper knife, paperknife |
+        | 0.28 | n04008634 : projectile, missile | 0.7 | n04081281 : restaurant, eating house, eating place, eatery |
+        | 0.28 | n04355933 : sunglass | 0.72 | n03532672 : hook, claw |
+        | 0.3 | n03658185 : letter opener, paper knife, paperknife | 0.74 | n04591157 : Windsor tie |
+        | 0.3 | n03642806 : laptop, laptop computer | 0.74 | n03016953 : chiffonier, commode |
+        | 0.3| n04286575 : spotlight, spot | 0.74 | n04239074 : sliding door |
+        | 0.32| n02089973 : English foxhound | 0.74 | n03476684 : hair slide |
+        
+## Inception-Resnet-v2 Architecture       
 
-
-  
 ## Reference
 + [https://github.com/tensorflow/models/tree/master/research/slim/nets](https://github.com/tensorflow/models/tree/master/research/slim/nets)
 + [https://github.com/tensorflow/models/tree/master/research/inception/inception/data](https://github.com/tensorflow/models/tree/master/research/inception/inception/data)
