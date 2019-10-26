@@ -46,8 +46,8 @@ All the results reported here are based on **this repo**, and 50000 ImageNet **v
 
     |   Model  | Single inference time(ms) | 
     | :------: | :------: |
-    | Inception-v4 | 38.56 | 
-    | Inception-ResNet-v2 | 72.42 | 
+    | Inception-v4 | 40.54 | 
+    | Inception-ResNet-v2 | 61.62 | 
 
 + Top-1 and top-5 accuracy(bottom-10 classes)
 
@@ -81,7 +81,17 @@ All the results reported here are based on **this repo**, and 50000 ImageNet **v
         | 0.3| n04286575 : spotlight, spot | 0.74 | n04239074 : sliding door |
         | 0.32| n02089973 : English foxhound | 0.74 | n03476684 : hair slide |
         
-## Inception-Resnet-v2 Architecture       
+## Inception-Resnet-v2 Architecture  
+
++ Stem
+
+    ![](./model/inception_resnet_v2_stem.png)
+    
+ + Overall schema
+ 
+    ![](./model/inception_resnet_v2.png)    
+    
+    **The output of the last Inception-ResNet-C layer has no ReLU activation.**
 
 ## Reference
 + [https://github.com/tensorflow/models/tree/master/research/slim/nets](https://github.com/tensorflow/models/tree/master/research/slim/nets)
